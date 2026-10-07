@@ -2037,7 +2037,7 @@ body.invitation-page {
 
   .welcome-section,
   .event-section {
-    padding: 78px 18px;
+    padding: 78px 25px;
   }
 
   .countdown-section,
@@ -2073,15 +2073,20 @@ body.invitation-page {
      EVENTS MOBILE
   ------------------------- */
 
+  /* -------------------------
+   EVENTS MOBILE
+------------------------- */
+
   .event-timeline {
     margin-top: 35px;
-
+    margin-left: 10px;
+    width: calc(100% - 10px);
     padding-left: 27px;
   }
 
   .timeline-event {
     padding-left: 14px;
-
+    padding-right: 14px;
     padding-bottom: 29px;
   }
 
