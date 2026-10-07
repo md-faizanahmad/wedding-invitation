@@ -1,6 +1,8 @@
 import "./style.css";
 import events from "./data/event-timeline.json";
+import { inject } from "@vercel/analytics";
 
+inject();
 /* ========================================
    COUNTDOWN
 ======================================== */

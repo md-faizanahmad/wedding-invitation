@@ -1,5 +1,7 @@
 import "./style.css";
+import { inject } from "@vercel/analytics";
 
+inject();
 /* ========================================
    1. ELEMENTS & ACCESSIBILITY
 ======================================== */
