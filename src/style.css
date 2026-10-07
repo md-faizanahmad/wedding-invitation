@@ -1,0 +1,2259 @@
+@import "tailwindcss";
+
+/* =========================================================
+   1. DESIGN TOKENS & RESET
+========================================================= */
+
+:root {
+  color-scheme: light;
+
+  --ivory: #faf7f0;
+  --paper: #fffdf8;
+  --paper-dark: #f0e8d9;
+
+  --gold: #b08a4b;
+  --gold-light: #d7bd86;
+  --gold-dark: #806035;
+
+  --olive: #65694b;
+
+  --ink: #302b25;
+  --muted: #81796e;
+
+  --line: rgba(176, 138, 75, 0.25);
+
+  --font-body: "DM Sans", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-script: "Great Vibes", cursive;
+  --font-urdu: "Noto Nastaliq Urdu", serif;
+
+  --container: 1120px;
+
+  --shadow-soft: 0 20px 70px rgba(66, 49, 27, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 30px;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+
+  background: var(--ivory);
+  color: var(--ink);
+
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.8;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================================================
+   INDEX / ENVELOPE PAGE
+   Before opening: completely fixed mobile viewport
+========================================================= */
+
+body:not(.invitation-open) {
+  height: 100svh;
+  overflow: hidden;
+}
+
+body.invitation-open {
+  overflow-x: hidden;
+}
+
+::selection {
+  color: var(--ink);
+  background: rgba(215, 189, 134, 0.45);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 5px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+main {
+  overflow: visible;
+}
+
+/* =========================================================
+   2. HIDDEN CONTENT
+   Kept for compatibility with the previous structure.
+========================================================= */
+
+.after-envelope {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.invitation-open .after-envelope {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+
+  transition:
+    opacity 650ms ease,
+    visibility 0s;
+}
+
+/* =========================================================
+   3. INTRO / ENVELOPE LANDING PAGE
+========================================================= */
+
+/* -------------------------
+   DESKTOP
+------------------------- */
+
+.intro-section {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+
+  width: 100%;
+  min-height: 100svh;
+  height: 100svh;
+  max-height: 100svh;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 58px 20px 28px;
+
+  /*
+    IMPORTANT:
+    The button sits outside the envelope.
+    Do not use overflow:hidden here.
+    The BODY handles the viewport lock.
+  */
+  overflow: visible;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 40%,
+      rgba(255, 255, 255, 0.97),
+      transparent 68%
+    ),
+    var(--ivory);
+}
+
+.intro-section::before,
+.intro-section::after {
+  position: absolute;
+  z-index: -1;
+
+  width: min(65vw, 540px);
+  aspect-ratio: 1;
+
+  border: 1px solid rgba(176, 138, 75, 0.13);
+  border-radius: 50%;
+
+  content: "";
+  pointer-events: none;
+}
+
+.intro-section::before {
+  top: -30%;
+  left: -32%;
+}
+
+.intro-section::after {
+  right: -32%;
+  bottom: -36%;
+}
+
+/* =========================================================
+   4. INTRO ORNAMENT
+========================================================= */
+
+.intro-ornament {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+  margin-bottom: 7px;
+
+  color: var(--gold);
+}
+
+.ornament-line {
+  width: 42px;
+  height: 1px;
+
+  background: linear-gradient(90deg, transparent, var(--gold-light));
+}
+
+.ornament-line:last-child {
+  background: linear-gradient(90deg, var(--gold-light), transparent);
+}
+
+.ornament-diamond {
+  display: flex;
+
+  width: 8px;
+  height: 8px;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--gold-dark);
+
+  font-size: 7px;
+  line-height: 1;
+
+  transform: rotate(45deg);
+}
+
+/* =========================================================
+   5. BISMILLAH
+========================================================= */
+
+.intro-bismillah {
+  margin: 0;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-urdu);
+  font-size: clamp(20px, 3vw, 27px);
+  font-weight: 500;
+
+  line-height: 2.1;
+
+  text-align: center;
+
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================================
+   6. INTRO HEADING
+========================================================= */
+
+.intro-heading {
+  margin: 10px 0 3px;
+
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 400;
+
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+
+  text-align: center;
+}
+
+/* =========================================================
+   7. URDU SUBTITLE
+========================================================= */
+
+.urdu-subtitle {
+  margin: 7px 0 0;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-urdu);
+  font-size: clamp(16px, 2.5vw, 22px);
+
+  line-height: 2;
+
+  text-align: center;
+}
+
+/* =========================================================
+   8. INTRO DESCRIPTION
+========================================================= */
+
+.intro-description {
+  max-width: 420px;
+
+  margin: 8px 0 0;
+
+  color: var(--muted);
+
+  font-family: var(--font-urdu);
+  font-size: 13px;
+
+  line-height: 2;
+
+  text-align: center;
+}
+
+/* =========================================================
+   9. AUDIO CONTROL
+========================================================= */
+
+.audio-control {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  z-index: 30;
+}
+
+.audio-button {
+  display: inline-flex;
+
+  min-height: 36px;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 7px 11px;
+
+  border: 1px solid var(--line);
+  border-radius: 999px;
+
+  background: rgba(255, 253, 248, 0.88);
+  color: var(--gold-dark);
+
+  cursor: pointer;
+
+  font-size: 9px;
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.audio-button:hover {
+  background: var(--paper);
+  border-color: rgba(176, 138, 75, 0.45);
+
+  transform: translateY(-1px);
+}
+
+.audio-button:active {
+  transform: scale(0.97);
+}
+
+#audioIcon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* =========================================================
+   10. ENVELOPE SCENE
+========================================================= */
+
+.envelope-scene {
+  position: relative;
+
+  width: min(100%, 440px);
+
+  margin: 28px auto 0;
+  padding: 0 8px;
+
+  perspective: 1400px;
+}
+
+.envelope {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1.52;
+
+  isolation: isolate;
+
+  overflow: visible;
+
+  filter: drop-shadow(0 18px 24px rgba(77, 57, 31, 0.14));
+}
+
+/* =========================================================
+   11. ENVELOPE BACK / PAPER
+========================================================= */
+
+.envelope-back {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(176, 138, 75, 0.4);
+
+  background: linear-gradient(145deg, #f2e7d2 0%, #e5d1ad 52%, #d8bd91 100%);
+}
+
+.envelope-back::before {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      transparent 49.65%,
+      rgba(128, 96, 53, 0.13) 50%,
+      transparent 50.35%
+    ),
+    linear-gradient(
+      35deg,
+      transparent 49.65%,
+      rgba(128, 96, 53, 0.1) 50%,
+      transparent 50.35%
+    );
+
+  content: "";
+}
+
+.envelope-back::after {
+  position: absolute;
+
+  inset: 9px;
+
+  border: 1px solid rgba(128, 96, 53, 0.2);
+
+  content: "";
+  pointer-events: none;
+}
+
+/* =========================================================
+   12. ENVELOPE FRONT POCKET
+========================================================= */
+
+.envelope-front {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  overflow: hidden;
+
+  background: linear-gradient(145deg, #f8f1e4 0%, #eadcc4 50%, #dfcba8 100%);
+
+  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+
+  transition:
+    opacity 400ms ease,
+    visibility 400ms ease;
+
+  pointer-events: none;
+}
+
+.envelope-front::before {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    30deg,
+    transparent 49.7%,
+    rgba(128, 96, 53, 0.12) 50%,
+    transparent 50.4%
+  );
+
+  content: "";
+}
+
+.envelope-front::after {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    150deg,
+    transparent 49.7%,
+    rgba(128, 96, 53, 0.08) 50%,
+    transparent 50.4%
+  );
+
+  content: "";
+}
+
+/* =========================================================
+   13. ENVELOPE FLAP
+========================================================= */
+
+.envelope-flap {
+  position: absolute;
+
+  inset: 0 0 auto;
+
+  z-index: 8;
+
+  height: 69%;
+
+  background: linear-gradient(160deg, #f7eddb 0%, #e7d5b6 55%, #d7bd91 100%);
+
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+
+  transform-origin: top center;
+  transform: rotateX(0deg);
+
+  transition:
+    transform 750ms cubic-bezier(0.22, 0.75, 0.25, 1),
+    opacity 400ms ease;
+
+  backface-visibility: hidden;
+
+  pointer-events: none;
+}
+
+.envelope-flap::before {
+  position: absolute;
+
+  inset: 8px 8px auto;
+
+  height: calc(100% - 16px);
+
+  border: 1px solid rgba(128, 96, 53, 0.18);
+
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+
+  content: "";
+}
+
+.envelope-flap::after {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 1px;
+  height: 70%;
+
+  background: rgba(128, 96, 53, 0.08);
+
+  content: "";
+
+  transform: translateX(-50%);
+}
+
+/* =========================================================
+   14. WAX SEAL / URDU MONOGRAM
+========================================================= */
+
+.envelope-monogram {
+  position: absolute;
+
+  top: 60%;
+  left: 50%;
+
+  z-index: 12;
+
+  display: flex;
+
+  width: 76px;
+  aspect-ratio: 1;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid rgba(255, 239, 197, 0.85);
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle at 31% 25%,
+    #d2b477 0%,
+    #b08a4b 38%,
+    #896538 76%,
+    #76552f 100%
+  );
+
+  color: #fff8e8;
+
+  cursor: pointer;
+
+  transform: translate(-50%, -50%);
+
+  box-shadow:
+    0 0 0 4px rgba(176, 138, 75, 0.2),
+    0 0 0 7px rgba(255, 253, 248, 0.28),
+    0 7px 18px rgba(75, 49, 20, 0.28),
+    inset 2px 2px 5px rgba(255, 245, 210, 0.22),
+    inset -4px -5px 8px rgba(61, 38, 14, 0.22);
+
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    opacity 250ms ease;
+}
+
+.envelope-monogram::before {
+  position: absolute;
+
+  inset: 7px;
+
+  border: 1px solid rgba(255, 240, 201, 0.42);
+  border-radius: 50%;
+
+  content: "";
+  pointer-events: none;
+}
+
+.envelope-monogram::after {
+  position: absolute;
+
+  top: 12px;
+  left: 16px;
+
+  width: 18px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 249, 222, 0.17);
+
+  content: "";
+
+  transform: rotate(-25deg);
+}
+
+.envelope-monogram:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+
+  box-shadow:
+    0 0 0 4px rgba(176, 138, 75, 0.23),
+    0 0 0 7px rgba(255, 253, 248, 0.3),
+    0 9px 22px rgba(75, 49, 20, 0.32),
+    inset 2px 2px 5px rgba(255, 245, 210, 0.25),
+    inset -4px -5px 8px rgba(61, 38, 14, 0.22);
+}
+
+.envelope-monogram:active {
+  transform: translate(-50%, -50%) scale(0.96);
+}
+
+.monogram-n,
+.monogram-g {
+  position: absolute;
+
+  z-index: 2;
+
+  color: #fff4d7;
+
+  font-family: var(--font-urdu);
+  font-size: 29px;
+  font-weight: 500;
+
+  line-height: 1;
+
+  text-shadow: 0 1px 1px rgba(65, 40, 14, 0.3);
+}
+
+.monogram-n {
+  top: 11px;
+  right: 11px;
+
+  transform: rotate(3deg);
+}
+
+.monogram-g {
+  bottom: 23px;
+  left: 13px;
+}
+
+/* Closed seal */
+
+.envelope[data-state="closed"] .envelope-monogram {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Open seal disappears */
+
+.envelope[data-state="open"] .envelope-monogram {
+  visibility: hidden;
+  opacity: 0;
+
+  transform: translate(-50%, -50%) scale(0.65);
+
+  pointer-events: none;
+
+  transition:
+    opacity 200ms ease,
+    transform 300ms ease,
+    visibility 0s linear 300ms;
+}
+
+/* =========================================================
+   15. ENVELOPE FRONT TEXT
+========================================================= */
+
+.envelope-names {
+  position: absolute;
+
+  top: 73%;
+  left: 50%;
+
+  z-index: 5;
+
+  width: 100%;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 4vw, 23px);
+
+  letter-spacing: 0.04em;
+
+  text-align: center;
+
+  transform: translate(-50%, -50%);
+}
+
+.envelope-caption {
+  position: absolute;
+
+  top: 85%;
+  left: 50%;
+
+  z-index: 5;
+
+  width: 100%;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 8px;
+
+  letter-spacing: 0.2em;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  transform: translateX(-50%);
+}
+
+/* =========================================================
+   16. INVITATION CARD
+   DESKTOP BASE
+========================================================= */
+
+/* =========================================================
+   INVITATION PAGE
+   Allow the full invitation to scroll normally
+========================================================= */
+
+body.invitation-page {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+/*
+
+   IMPORTANT:
+   This is intentionally smaller than the old version.
+
+   Old:
+   height: 78%
+   width: 84%
+
+   New:
+   height: 62%
+   width: 78%
+
+   This prevents the card from covering the
+   Bismillah / heading / Urdu subtitle on mobile.
+*/
+
+.invitation-card {
+  position: absolute;
+
+  top: 10px;
+  left: 11%;
+
+  z-index: 2;
+
+  display: flex;
+
+  width: 78%;
+  height: 62%;
+
+  min-height: 0;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 10px;
+
+  border: 1px solid rgba(176, 138, 75, 0.5);
+
+  background:
+    radial-gradient(ellipse at top, #fffefa, transparent 75%), var(--paper);
+
+  box-shadow:
+    0 8px 25px rgba(54, 39, 20, 0.12),
+    0 2px 5px rgba(54, 39, 20, 0.05);
+
+  text-align: center;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transform: translateY(0) scale(0.96);
+
+  transition:
+    transform 550ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    opacity 300ms ease,
+    visibility 0s linear 550ms;
+
+  pointer-events: none;
+}
+
+.invitation-card::before {
+  position: absolute;
+
+  inset: 7px;
+
+  border: 1px solid rgba(176, 138, 75, 0.22);
+
+  content: "";
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   17. OPENED CARD
+========================================================= */
+
+.envelope[data-state="open"] .invitation-card {
+  z-index: 15;
+
+  visibility: visible;
+  opacity: 1;
+
+  /*
+    Only a small upward movement.
+    This keeps the card around the envelope
+    instead of covering the introduction.
+  */
+  transform: translateY(-5%) scale(1);
+
+  transition:
+    transform 550ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    opacity 300ms ease 80ms,
+    visibility 0s;
+
+  pointer-events: auto;
+}
+
+/* =========================================================
+   18. COUPLE NAMES
+========================================================= */
+
+.couple-names {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0;
+
+  font-family: var(--font-script);
+
+  /*
+    Elegant, smaller names.
+  */
+  font-size: clamp(25px, 5.5vw, 36px);
+
+  font-weight: 400;
+
+  line-height: 1.08;
+
+  letter-spacing: 0.01em;
+}
+
+.name-line {
+  color: var(--gold-dark);
+
+  white-space: nowrap;
+
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.name-ampersand {
+  margin: 2px 0;
+
+  color: var(--gold);
+
+  font-family: var(--font-serif);
+
+  font-size: 17px;
+
+  font-style: italic;
+  font-weight: 500;
+
+  line-height: 1;
+}
+
+/* =========================================================
+   19. CARD DATE
+========================================================= */
+
+.card-date {
+  margin: 8px 0 0;
+
+  color: var(--ink);
+
+  font-family: var(--font-serif);
+
+  font-size: 10px;
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+
+  line-height: 1.5;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   20. CARD DIVIDER
+========================================================= */
+
+.card-rule {
+  width: 36px;
+  height: 1px;
+
+  margin-top: 9px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-light),
+    transparent
+  );
+}
+
+/* =========================================================
+   21. DETAILS BUTTON
+   OUTSIDE THE INVITATION CARD
+========================================================= */
+
+.details-button {
+  position: absolute;
+
+  left: 50%;
+  bottom: -40px;
+
+  z-index: 50;
+
+  display: inline-flex;
+
+  min-height: 34px;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 7px 13px;
+
+  border: 1px solid rgba(176, 138, 75, 0.55);
+  border-radius: 999px;
+
+  background: rgba(255, 253, 248, 0.98);
+
+  color: var(--gold-dark);
+
+  font-size: 8px;
+  font-weight: 500;
+
+  letter-spacing: 0.07em;
+
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateX(-50%) translateY(6px);
+
+  pointer-events: none;
+
+  box-shadow: 0 5px 16px rgba(54, 39, 20, 0.09);
+
+  transition:
+    opacity 300ms ease 250ms,
+    visibility 0s linear 550ms,
+    transform 350ms ease 250ms;
+}
+
+/* Show only after opening */
+
+.envelope[data-state="open"] ~ .details-button {
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateX(-50%) translateY(0);
+
+  pointer-events: auto;
+
+  transition:
+    opacity 300ms ease 250ms,
+    visibility 0s,
+    transform 350ms ease 250ms;
+}
+
+.details-button:hover {
+  background: var(--gold-dark);
+  color: #fffdf8;
+
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.details-button:active {
+  transform: translateX(-50%) scale(0.97);
+}
+
+.details-button span:last-child {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* =========================================================
+   22. ENVELOPE HINT
+========================================================= */
+
+.envelope-hint {
+  min-height: 22px;
+
+  margin: 16px 0 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  letter-spacing: 0.03em;
+
+  text-align: center;
+
+  transition:
+    opacity 250ms ease,
+    visibility 250ms ease;
+}
+
+/* Hide hint after opening */
+
+.envelope[data-state="open"] ~ .envelope-hint {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* =========================================================
+   23. CLOSE BUTTON
+   NOT USED ANYMORE
+========================================================= */
+
+#closeEnvelope,
+.text-button {
+  display: none !important;
+}
+
+/* =========================================================
+   24. WELCOME
+========================================================= */
+
+.welcome-section {
+  padding: 100px 20px 110px;
+
+  background: var(--paper);
+
+  text-align: center;
+}
+
+.section-ornament {
+  margin-bottom: 17px;
+}
+
+.section-ornament::before,
+.section-ornament::after {
+  display: inline-block;
+
+  width: 38px;
+  height: 1px;
+
+  margin: 0 10px;
+
+  vertical-align: middle;
+
+  background: var(--gold-light);
+
+  content: "";
+}
+
+.section-ornament span {
+  font-family: var(--font-serif);
+  font-size: 20px;
+}
+
+.section-heading {
+  margin: 0;
+
+  font-family: var(--font-serif);
+
+  font-size: clamp(34px, 5vw, 48px);
+  font-weight: 400;
+
+  letter-spacing: -0.025em;
+
+  line-height: 1.25;
+}
+
+.section-heading em {
+  color: var(--gold-dark);
+  font-weight: 400;
+}
+
+.welcome-copy {
+  max-width: 610px;
+
+  margin: 22px auto 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 2.1;
+}
+
+.urdu-quote {
+  max-width: 680px;
+
+  margin: 26px auto 0;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-urdu);
+
+  font-size: clamp(17px, 2.5vw, 21px);
+
+  line-height: 2.5;
+
+  text-align: center;
+}
+
+.welcome-signature {
+  margin: 23px 0 0;
+
+  color: var(--ink);
+
+  font-family: var(--font-script);
+  font-size: 35px;
+}
+
+/* =========================================================
+   25. COUNTDOWN
+========================================================= */
+
+.countdown-section {
+  position: relative;
+
+  padding: 90px 20px 100px;
+
+  overflow: hidden;
+
+  background: #eee5d4;
+
+  text-align: center;
+}
+
+.countdown-section::before,
+.countdown-section::after {
+  position: absolute;
+
+  width: 250px;
+  aspect-ratio: 1;
+
+  border: 1px solid rgba(176, 138, 75, 0.2);
+  border-radius: 50%;
+
+  content: "";
+  pointer-events: none;
+}
+
+.countdown-section::before {
+  top: -170px;
+  left: -100px;
+}
+
+.countdown-section::after {
+  right: -100px;
+  bottom: -180px;
+}
+
+.countdown-section .eyebrow {
+  margin-bottom: 13px;
+}
+
+.countdown-grid {
+  display: grid;
+
+  width: min(100%, 570px);
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 13px;
+
+  margin: 38px auto 0;
+}
+
+.countdown-item {
+  padding: 20px 8px 16px;
+
+  border: 1px solid rgba(176, 138, 75, 0.35);
+
+  background: rgba(255, 253, 248, 0.7);
+}
+
+.countdown-value {
+  display: block;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-serif);
+
+  font-size: clamp(32px, 5vw, 43px);
+  font-weight: 500;
+
+  line-height: 1.2;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+  display: block;
+
+  margin-top: 7px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.countdown-message {
+  margin: 24px auto 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   26. EVENTS
+========================================================= */
+
+.event-section {
+  padding: 105px 20px 110px;
+
+  background: var(--ivory);
+}
+
+.event-heading {
+  margin-bottom: 15px;
+
+  text-align: center;
+}
+
+.event-heading .eyebrow {
+  margin-bottom: 13px;
+}
+
+.event-intro {
+  max-width: 480px;
+
+  margin: 20px auto 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 2;
+
+  text-align: center;
+}
+
+.event-timeline {
+  position: relative;
+
+  width: min(100%, 700px);
+
+  margin: 48px auto 0;
+
+  padding-left: 32px;
+}
+
+.event-timeline::before {
+  position: absolute;
+
+  top: 8px;
+  bottom: 8px;
+  left: 7px;
+
+  width: 1px;
+
+  background: var(--gold-light);
+
+  content: "";
+}
+
+.timeline-event {
+  position: relative;
+
+  padding: 0 0 34px 18px;
+}
+
+.timeline-event:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+
+  top: 7px;
+  left: -30px;
+
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+
+  background: var(--ivory);
+
+  box-shadow: 0 0 0 4px var(--ivory);
+}
+
+.timeline-date {
+  margin: 0 0 5px;
+
+  color: var(--gold-dark);
+
+  font-size: 11px;
+
+  letter-spacing: 0.035em;
+
+  line-height: 1.8;
+}
+
+.timeline-event h3 {
+  margin: 0;
+
+  font-family: var(--font-serif);
+
+  font-size: clamp(23px, 4vw, 29px);
+  font-weight: 500;
+
+  line-height: 1.35;
+}
+
+.timeline-urdu {
+  margin: 5px 0 0;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-urdu);
+
+  font-size: 16px;
+
+  line-height: 2.2;
+}
+
+.event-footnote {
+  margin: 35px auto 0;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+/* =========================================================
+   27. BLESSINGS / WHATSAPP
+========================================================= */
+
+.blessing-section {
+  padding: 90px 20px 100px;
+
+  background: var(--paper);
+
+  text-align: center;
+}
+
+.blessing-section .section-heading {
+  max-width: 620px;
+
+  margin-inline: auto;
+}
+
+.blessing-note {
+  max-width: 440px;
+
+  margin: 17px auto 27px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 2;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+
+  min-height: 49px;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 13px 23px;
+
+  border: 1px solid var(--olive);
+
+  background: var(--olive);
+
+  color: #fffdf8;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  letter-spacing: 0.04em;
+
+  transition:
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.whatsapp-button:hover {
+  background: #4d5238;
+
+  transform: translateY(-2px);
+}
+
+.whatsapp-icon {
+  display: inline-flex;
+
+  width: 18px;
+  height: 18px;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+}
+
+/* =========================================================
+   28. CLOSING
+========================================================= */
+
+.closing-section {
+  position: relative;
+
+  padding: 90px 20px 95px;
+
+  overflow: hidden;
+
+  border-top: 1px solid var(--line);
+
+  background:
+    radial-gradient(ellipse at center, #fffdf8 0%, transparent 75%),
+    var(--ivory);
+
+  text-align: center;
+}
+
+.closing-ornament {
+  margin-bottom: 15px;
+
+  color: var(--gold);
+
+  font-family: var(--font-serif);
+
+  font-size: 24px;
+}
+
+.closing-bismillah {
+  margin: 0;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-urdu);
+
+  font-size: clamp(23px, 4vw, 31px);
+
+  line-height: 2.2;
+}
+
+.closing-translation {
+  margin: 8px 0 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  letter-spacing: 0.04em;
+}
+
+.closing-names {
+  margin: 23px 0 0;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-script);
+
+  font-size: clamp(42px, 7vw, 58px);
+
+  line-height: 1.4;
+}
+
+.closing-thanks {
+  max-width: 420px;
+
+  margin: 15px auto 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+  line-height: 2;
+}
+
+.back-to-top {
+  display: inline-block;
+
+  margin-top: 25px;
+  padding: 5px 0;
+
+  border-bottom: 1px solid var(--gold-light);
+
+  color: var(--gold-dark);
+
+  font-size: 10px;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   29. BACK TO HOME
+   Invitation page only
+========================================================= */
+
+/* =========================================================
+   TOP BACK BUTTON — INVITATION PAGE
+========================================================= */
+
+.back-home-button {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 100;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 36px;
+
+  padding: 7px 13px;
+
+  border: 1px solid rgba(176, 138, 75, 0.35);
+  border-radius: 999px;
+
+  background: rgba(255, 253, 248, 0.88);
+  color: var(--gold-dark);
+
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.04em;
+
+  text-decoration: none;
+
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 5px 18px rgba(54, 39, 20, 0.08);
+
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.back-home-button span:first-child {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.back-home-button:hover {
+  background: var(--gold-dark);
+  border-color: var(--gold-dark);
+  color: #fffdf8;
+
+  transform: translateX(-2px);
+}
+
+.back-home-button:active {
+  transform: scale(0.96);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .back-home-button {
+    top: 11px;
+    left: 11px;
+
+    min-height: 32px;
+
+    padding: 6px 10px;
+
+    gap: 5px;
+
+    font-size: 8px;
+  }
+
+  .back-home-button span:first-child {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+  .back-home-button {
+    top: 9px;
+    left: 9px;
+
+    min-height: 30px;
+
+    padding: 5px 9px;
+
+    font-size: 7.5px;
+  }
+}
+/* =========================================================
+   30. FOOTER
+========================================================= */
+
+.site-footer {
+  display: flex;
+
+  min-height: 78px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px 20px;
+
+  border-top: 1px solid var(--line);
+
+  background: var(--paper);
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+
+  line-height: 2;
+}
+
+.footer-credit {
+  display: block;
+
+  color: var(--gold-dark);
+
+  font-family: var(--font-serif);
+
+  font-size: 15px;
+
+  font-style: italic;
+}
+
+/* =========================================================
+   31. SCROLL REVEAL
+========================================================= */
+
+.reveal {
+  opacity: 0;
+
+  transform: translateY(24px);
+
+  transition:
+    opacity 750ms ease,
+    transform 750ms cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.timeline-event.reveal:nth-child(even) {
+  transition-delay: 100ms;
+}
+
+/* =========================================================
+   32. DESKTOP RESPONSIVE
+   900px AND ABOVE
+========================================================= */
+
+@media (min-width: 900px) {
+  .intro-section {
+    padding-top: 65px;
+  }
+
+  .envelope-scene {
+    margin-top: 32px;
+  }
+
+  /*
+    Desktop envelope card.
+    Slightly larger than mobile, but still compact.
+  */
+  .invitation-card {
+    width: 78%;
+    height: 62%;
+  }
+
+  .envelope[data-state="open"] .invitation-card {
+    transform: translateY(-5%) scale(1);
+  }
+
+  .details-button {
+    bottom: -42px;
+
+    min-height: 36px;
+
+    padding: 8px 15px;
+
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   33. MOBILE
+   640px AND BELOW
+========================================================= */
+
+@media (max-width: 640px) {
+  /* -------------------------
+     GENERAL MOBILE
+  ------------------------- */
+
+  body {
+    font-size: 14px;
+  }
+
+  /* -------------------------
+     INTRO MOBILE
+  ------------------------- */
+
+  .intro-section {
+    min-height: 100svh;
+    height: 100svh;
+    max-height: 100svh;
+
+    padding: 64px 14px 24px;
+  }
+
+  .intro-ornament {
+    gap: 9px;
+
+    margin-bottom: 5px;
+  }
+
+  .ornament-line {
+    width: 30px;
+  }
+
+  .ornament-diamond {
+    width: 7px;
+    height: 7px;
+
+    font-size: 6px;
+  }
+
+  .intro-bismillah {
+    font-size: 19px;
+    line-height: 2;
+  }
+
+  .intro-heading {
+    margin-top: 7px;
+
+    font-size: clamp(29px, 8.2vw, 41px);
+  }
+
+  .urdu-subtitle {
+    margin-top: 4px;
+
+    font-size: 16px;
+  }
+
+  .intro-description {
+    max-width: 315px;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    line-height: 2;
+  }
+
+  /* -------------------------
+     AUDIO MOBILE
+  ------------------------- */
+
+  .audio-control {
+    top: 11px;
+    right: 11px;
+  }
+
+  .audio-button {
+    min-height: 32px;
+
+    padding: 6px 9px;
+
+    font-size: 8px;
+  }
+
+  /* -------------------------
+     ENVELOPE MOBILE
+  ------------------------- */
+
+  .envelope-scene {
+    width: min(100%, 390px);
+
+    margin-top: 22px;
+
+    padding-inline: 2px;
+  }
+
+  .envelope {
+    aspect-ratio: 1.42;
+  }
+
+  /* -------------------------
+     WAX SEAL MOBILE
+  ------------------------- */
+
+  .envelope-monogram {
+    width: 64px;
+  }
+
+  .monogram-n,
+  .monogram-g {
+    font-size: 24px;
+  }
+
+  .monogram-n {
+    top: 10px;
+    right: 10px;
+  }
+
+  .monogram-g {
+    bottom: 20px;
+    left: 11px;
+  }
+
+  /* -------------------------
+     ENVELOPE TEXT MOBILE
+  ------------------------- */
+
+  .envelope-names {
+    top: 73%;
+
+    font-size: 18px;
+  }
+
+  .envelope-caption {
+    top: 85%;
+
+    font-size: 7px;
+  }
+
+  /* =======================================================
+     INVITATION CARD MOBILE
+     THIS IS THE IMPORTANT FIX
+  ======================================================= */
+
+  .invitation-card {
+    /*
+      SMALL CARD
+
+      It no longer uses the old:
+      width: 90%
+      height: 91%
+
+      This keeps the card inside the envelope area.
+    */
+
+    top: 15px;
+
+    left: 11%;
+
+    width: 78%;
+    height: 82%;
+
+    padding: 12px 8px;
+  }
+
+  .envelope[data-state="open"] .invitation-card {
+    /*
+      Only slightly lifted.
+      It will NOT cover the Bismillah,
+      main heading or Urdu subtitle.
+    */
+    transform: translateY(-4%) scale(1);
+  }
+
+  /* -------------------------
+     COUPLE NAMES MOBILE
+  ------------------------- */
+
+  .couple-names {
+    font-size: clamp(24px, 6.2vw, 32px);
+  }
+
+  .name-ampersand {
+    margin: 1px 0;
+
+    font-size: 16px;
+  }
+
+  /* -------------------------
+     DATE MOBILE
+  ------------------------- */
+
+  .card-date {
+    margin-top: 7px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.09em;
+  }
+
+  /* -------------------------
+     CARD RULE MOBILE
+  ------------------------- */
+
+  .card-rule {
+    width: 32px;
+
+    margin-top: 8px;
+  }
+
+  /* -------------------------
+     DETAILS BUTTON MOBILE
+  ------------------------- */
+
+  .details-button {
+    /*
+      Keep it close to the envelope.
+    */
+
+    bottom: -38px;
+
+    min-height: 33px;
+
+    padding: 7px 12px;
+
+    font-size: 8px;
+  }
+
+  /* -------------------------
+     HINT MOBILE
+  ------------------------- */
+
+  .envelope-hint {
+    margin-top: 13px;
+
+    font-size: 9px;
+  }
+
+  /* -------------------------
+     INVITATION CONTENT MOBILE
+  ------------------------- */
+
+  .welcome-section,
+  .event-section {
+    padding: 78px 18px;
+  }
+
+  .countdown-section,
+  .blessing-section {
+    padding: 75px 16px 80px;
+  }
+
+  /* -------------------------
+     COUNTDOWN MOBILE
+  ------------------------- */
+
+  .countdown-grid {
+    gap: 7px;
+
+    margin-top: 28px;
+  }
+
+  .countdown-item {
+    padding: 15px 4px 12px;
+  }
+
+  .countdown-value {
+    font-size: clamp(26px, 7vw, 34px);
+  }
+
+  .countdown-label {
+    font-size: 8px;
+
+    letter-spacing: 0.06em;
+  }
+
+  /* -------------------------
+     EVENTS MOBILE
+  ------------------------- */
+
+  .event-timeline {
+    margin-top: 35px;
+
+    padding-left: 27px;
+  }
+
+  .timeline-event {
+    padding-left: 14px;
+
+    padding-bottom: 29px;
+  }
+
+  .timeline-dot {
+    left: -25px;
+  }
+
+  .timeline-date {
+    font-size: 10px;
+  }
+
+  /* -------------------------
+     CLOSING MOBILE
+  ------------------------- */
+
+  .closing-section {
+    padding: 72px 18px 78px;
+  }
+}
+
+/* =========================================================
+   34. VERY SMALL PHONES
+   380px AND BELOW
+========================================================= */
+
+@media (max-width: 380px) {
+  /* -------------------------
+     INTRO VERY SMALL
+  ------------------------- */
+
+  .intro-section {
+    padding-top: 58px;
+    padding-inline: 10px;
+  }
+
+  .intro-bismillah {
+    font-size: 17px;
+  }
+
+  .intro-heading {
+    font-size: 29px;
+  }
+
+  .urdu-subtitle {
+    font-size: 15px;
+  }
+
+  .intro-description {
+    font-size: 10px;
+  }
+
+  .ornament-line {
+    width: 25px;
+  }
+
+  /* -------------------------
+     ENVELOPE VERY SMALL
+  ------------------------- */
+
+  .envelope-scene {
+    width: min(100%, 350px);
+
+    margin-top: 18px;
+  }
+
+  .envelope {
+    aspect-ratio: 1.38;
+  }
+
+  /* -------------------------
+     WAX SEAL VERY SMALL
+  ------------------------- */
+
+  .envelope-monogram {
+    width: 58px;
+  }
+
+  .monogram-n,
+  .monogram-g {
+    font-size: 22px;
+  }
+
+  /* =======================================================
+     INVITATION CARD VERY SMALL
+  ======================================================= */
+
+  .invitation-card {
+    top: 7px;
+
+    left: 12%;
+
+    width: 76%;
+    height: 60%;
+
+    padding: 10px 7px;
+  }
+
+  .envelope[data-state="open"] .invitation-card {
+    transform: translateY(-3%) scale(1);
+  }
+
+  /* -------------------------
+     NAMES VERY SMALL
+  ------------------------- */
+
+  .couple-names {
+    font-size: 23px;
+  }
+
+  .name-ampersand {
+    font-size: 15px;
+  }
+
+  /* -------------------------
+     DATE VERY SMALL
+  ------------------------- */
+
+  .card-date {
+    font-size: 8px;
+  }
+
+  /* -------------------------
+     DETAILS BUTTON VERY SMALL
+  ------------------------- */
+
+  .details-button {
+    bottom: -36px;
+
+    min-height: 32px;
+
+    padding-inline: 11px;
+
+    font-size: 7.5px;
+  }
+
+  /* -------------------------
+     COUNTDOWN VERY SMALL
+  ------------------------- */
+
+  .countdown-grid {
+    gap: 5px;
+  }
+
+  .countdown-item {
+    padding-inline: 2px;
+  }
+
+  .countdown-label {
+    font-size: 7px;
+  }
+}
+
+/* =========================================================
+   35. ACCESSIBILITY / REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

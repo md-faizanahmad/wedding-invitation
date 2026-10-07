@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <meta name="theme-color" content="#faf7f0" />
+
+    <meta name="description" content="Wedding invitation of Nushad Alam and Gulafsha Parween." />
+
+    <title>Nushad &amp; Gulafsha | Wedding Invitation</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Great+Vibes&family=Noto+Nastaliq+Urdu:wght@400;500&display=swap"
+        rel="stylesheet" />
+
+    <script type="module" src="/src/main.js"></script>
+</head>
+
+<body>
+    <main>
+        <!-- =====================================
+           ENTRY / ENVELOPE
+      ====================================== -->
+
+        <section class="intro-section" id="home" aria-label="Wedding invitation">
+            <!-- Top ornament -->
+            <div class="intro-ornament" aria-hidden="true">
+                <span class="ornament-line"></span>
+                <span class="ornament-diamond">◆</span>
+                <span class="ornament-line"></span>
+            </div>
+
+            <!-- Bismillah -->
+            <p class="intro-bismillah" lang="ar" dir="rtl">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </p>
+
+            <!-- Introduction -->
+            <h1 class="intro-heading">
+                A new journey begins
+            </h1>
+
+            <p class="urdu-subtitle" lang="ur" dir="rtl">
+                ایک نئے سفر کا آغاز
+            </p>
+
+            <p class="intro-description">
+                With the blessings of Allah,
+                you are warmly invited.
+            </p>
+
+            <!-- =================================
+             AUDIO
+        ================================== -->
+
+            <div class="audio-control">
+                <button class="audio-button" id="audioToggle" type="button" aria-label="Turn wedding audio off"
+                    aria-pressed="true">
+                    <span id="audioIcon" aria-hidden="true">♫</span>
+
+                    <span id="audioLabel">
+                        Music on
+                    </span>
+                </button>
+
+                <audio id="weddingAudio" preload="auto" loop>
+                    <source src="/audio/audio.mp3" type="audio/mpeg" />
+                </audio>
+            </div>
+
+            <!-- =================================
+             ENVELOPE
+        ================================== -->
+
+            <div class="envelope-scene">
+                <div class="envelope" id="envelope" data-state="closed">
+                    <!-- Back paper -->
+                    <div class="envelope-back" aria-hidden="true"></div>
+
+                    <!-- =================================
+                 INVITATION CARD
+            ================================== -->
+
+                    <article class="invitation-card" id="invitationCard" inert aria-label="Wedding invitation card">
+                        <h2 class="couple-names">
+                            <span class="name-line">
+                                Nushad Alam
+                            </span>
+
+                            <span class="name-ampersand">
+                                &amp;
+                            </span>
+
+                            <span class="name-line">
+                                Gulafsha Parween
+                            </span>
+                        </h2>
+
+                        <p class="card-date" id="cardDate">
+                            13 November 2026
+                        </p>
+
+                        <div class="card-rule" aria-hidden="true"></div>
+                    </article>
+
+                    <!-- Envelope front -->
+                    <div class="envelope-front" aria-hidden="true"></div>
+
+                    <!-- Wax seal -->
+                    <button class="envelope-monogram" id="openEnvelope" type="button"
+                        aria-label="Open wedding invitation" aria-expanded="false" aria-controls="invitationCard">
+                        <span class="monogram-n" lang="ur">
+                            ن
+                        </span>
+
+                        <span class="monogram-g" lang="ur">
+                            گ
+                        </span>
+                    </button>
+
+                    <!-- Envelope flap -->
+                    <div class="envelope-flap" aria-hidden="true"></div>
+                </div>
+
+                <!-- =================================
+               VIEW INVITATION DETAILS
+               OUTSIDE THE CARD
+          ================================== -->
+
+                <a class="details-button" href="/invitation.html" aria-label="View full invitation details">
+                    <span>
+                        View invitation details
+                    </span>
+
+                    <span aria-hidden="true">
+                        ↓
+                    </span>
+                </a>
+
+                <!-- Instruction -->
+                <p class="envelope-hint" id="envelopeHint" aria-live="polite">
+                    Tap the seal to open
+                </p>
+
+                <!-- Close invitation card -->
+                <button class="text-button" id="closeEnvelope" type="button" hidden>
+                    Close invitation
+                </button>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
