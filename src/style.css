@@ -1813,7 +1813,12 @@ body.invitation-page {
     height: 100svh;
     max-height: 100svh;
 
-    padding: 64px 14px 24px;
+    padding: 20px 14px 120px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .intro-ornament {
@@ -1882,15 +1887,17 @@ body.invitation-page {
   ------------------------- */
 
   .envelope-scene {
-    width: min(360px, 92vw);
-    margin: 28px auto 0;
-    padding: 0;
+    width: min(100%, 390px);
+
+    margin-top: 22px;
+
+    padding-inline: 2px;
   }
 
   .envelope {
-    width: 100%;
     aspect-ratio: 1.42;
   }
+
   /* -------------------------
      WAX SEAL MOBILE
   ------------------------- */
@@ -2116,8 +2123,16 @@ body.invitation-page {
   ------------------------- */
 
   .intro-section {
-    padding-top: 58px;
-    padding-inline: 10px;
+    min-height: 100svh;
+    height: 100svh;
+    max-height: 100svh;
+
+    padding: 20px 12px 120px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .intro-bismillah {
@@ -2145,8 +2160,9 @@ body.invitation-page {
   ------------------------- */
 
   .envelope-scene {
-    width: min(340px, 92vw);
-    margin-top: 24px;
+    width: min(100%, 350px);
+
+    margin-top: 18px;
   }
 
   .envelope {
